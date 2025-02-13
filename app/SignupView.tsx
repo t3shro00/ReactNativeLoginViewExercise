@@ -1,70 +1,47 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 
-const SignupView = () => {
+export default function SignupView() {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleSignupClick = () => {
-    console.log('Signup clicked');
-    // Implement signup logic here
-  };
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton}>
-        <Text style={styles.backButtonText}>←</Text>
-      </TouchableOpacity>
-      
-      <Text style={styles.heading}>Create an Account</Text>
-      <Text style={styles.subHeading}>Sign up to get started</Text>
-      
+      <Text style={styles.heading}>Sign Up</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Full Name"
-        placeholderTextColor="#888"
         value={fullName}
         onChangeText={setFullName}
       />
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="#888"
-        keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
-        placeholderTextColor="#888"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        placeholderTextColor="#888"
-        secureTextEntry
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-      />
-      
-      <TouchableOpacity style={styles.button} onPress={handleSignupClick}>
+
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
-      <View style={styles.loginContainer}>
-        <Text style={styles.loginText}>Already have an account?</Text>
-        <Link href="/LoginView" style={styles.loginLink}> Sign in</Link>
-      </View>
+      <TouchableOpacity onPress={() => router.push('/LoginView')}>
+        <Text style={styles.linkText}>Already have an account? Log in</Text>
+      </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -74,24 +51,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   heading: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 5,
-  },
-  subHeading: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#666',
     marginBottom: 20,
-  },
-  backButton: {
-    alignSelf: 'flex-start',
-    marginBottom: 10,
-  },
-  backButtonText: {
-    fontSize: 24,
-    color: '#007BFF',
   },
   input: {
     height: 50,
@@ -112,22 +75,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
   },
-  loginContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  linkText: {
+    textAlign: 'center',
+    color: '#007BFF',
     marginTop: 10,
   },
-  loginText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  loginLink: {
-    fontSize: 14,
-    color: '#007BFF',
-    fontWeight: 'bold',
-  },
 });
-
-export default SignupView;

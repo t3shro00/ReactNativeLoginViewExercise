@@ -1,52 +1,40 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 
-const LoginView = () => {
+export default function LoginView() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLoginClick = () => {
-    console.log('Login clicked');
-    // Implement login logic here
-  };
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Welcome Back</Text>
-      <Text style={styles.subHeading}>Log in to continue</Text>
-
+      <Text style={styles.heading}>Login</Text>
+      
       <TextInput
         style={styles.input}
         placeholder="Username"
-        placeholderTextColor="#888"
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
-        placeholderTextColor="#888"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLoginClick}>
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Forgot your password?</Text>
+      <TouchableOpacity onPress={() => router.push('/SignupView')}>
+        <Text style={styles.linkText}>Don't have an account? Sign up</Text>
       </TouchableOpacity>
-
-      <View style={styles.signupContainer}>
-        <Text style={styles.signupText}>Don't have an account?</Text>
-        <Link href="/SignupView" style={styles.signupLink}> Sign up</Link>
-      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -56,15 +44,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   heading: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 5,
-  },
-  subHeading: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#666',
     marginBottom: 20,
   },
   input: {
@@ -86,27 +68,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
   },
-  forgotPassword: {
+  linkText: {
     textAlign: 'center',
     color: '#007BFF',
-    marginVertical: 8,
-  },
-  signupContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
     marginTop: 10,
   },
-  signupText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  signupLink: {
-    fontSize: 14,
-    color: '#007BFF',
-    fontWeight: 'bold',
-  },
 });
-
-export default LoginView;

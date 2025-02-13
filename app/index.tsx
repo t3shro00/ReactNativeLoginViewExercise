@@ -1,15 +1,20 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Link } from 'expo-router'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
-const index = () => {
+export default function HomePage() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to the login and SignUp View</Text>
-      <Link href="/LoginView" style={styles.link}>Go to Login</Link>
-      <Link href="/SignupView" style={styles.link}>Go to Signup</Link>
+      <Text style={styles.heading}>Welcome to the App</Text>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/LoginView')}>
+        <Text style={styles.buttonText}>Go to Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => router.push('/SignupView')}>
+        <Text style={styles.buttonText}>Go to Signup</Text>
+      </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -19,16 +24,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
   },
-  title: {
+  heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  link: {
-    fontSize: 18,
-    color: 'blue',
+  button: {
+    backgroundColor: '#007BFF',
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 8,
     marginVertical: 10,
   },
-})
-
-export default index
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+  },
+});
