@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Link } from 'expo-router';
 
 const SignupView = () => {
   const [fullName, setFullName] = useState('');
@@ -12,32 +13,34 @@ const SignupView = () => {
     // Implement signup logic here
   };
 
-  const handleBackToLoginClick = () => {
-    console.log('Navigate to login');
-    // Implement navigation back to Login View
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Sign Up</Text>
-      <TouchableOpacity onPress={handleBackToLoginClick} style={styles.backButton}>
+      <TouchableOpacity style={styles.backButton}>
         <Text style={styles.backButtonText}>←</Text>
       </TouchableOpacity>
+      
+      <Text style={styles.heading}>Create an Account</Text>
+      <Text style={styles.subHeading}>Sign up to get started</Text>
+      
       <TextInput
         style={styles.input}
         placeholder="Full Name"
+        placeholderTextColor="#888"
         value={fullName}
         onChangeText={setFullName}
       />
       <TextInput
         style={styles.input}
         placeholder="Email"
+        placeholderTextColor="#888"
+        keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#888"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
@@ -45,16 +48,20 @@ const SignupView = () => {
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
+        placeholderTextColor="#888"
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
       />
+      
       <TouchableOpacity style={styles.button} onPress={handleSignupClick}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleBackToLoginClick}>
-        <Text style={styles.link}>Already have an account? Sign in</Text>
-      </TouchableOpacity>
+
+      <View style={styles.loginContainer}>
+        <Text style={styles.loginText}>Already have an account?</Text>
+        <Link href="/LoginView" style={styles.loginLink}> Sign in</Link>
+      </View>
     </View>
   );
 };
@@ -64,41 +71,62 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#f5f5f5',
   },
   heading: {
-    fontSize: 30,
-    marginBottom: 20,
+    fontSize: 28,
+    fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 5,
+  },
+  subHeading: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#666',
+    marginBottom: 20,
   },
   backButton: {
     alignSelf: 'flex-start',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   backButtonText: {
-    fontSize: 20,
+    fontSize: 24,
     color: '#007BFF',
   },
   input: {
-    height: 40,
-    borderColor: '#ccc',
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginBottom: 12,
     borderWidth: 1,
-    marginBottom: 10,
-    paddingLeft: 10,
+    borderColor: '#ddd',
   },
   button: {
     backgroundColor: '#007BFF',
-    paddingVertical: 10,
+    paddingVertical: 14,
+    borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 10,
+    marginVertical: 10,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
+    fontWeight: 'bold',
   },
-  link: {
-    color: 'blue',
-    textAlign: 'center',
-    marginVertical: 5,
+  loginContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  loginText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  loginLink: {
+    fontSize: 14,
+    color: '#007BFF',
+    fontWeight: 'bold',
   },
 });
 

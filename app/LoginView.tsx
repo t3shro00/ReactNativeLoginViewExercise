@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Link } from 'expo-router';
 
 const LoginView = () => {
   const [username, setUsername] = useState('');
@@ -10,41 +11,39 @@ const LoginView = () => {
     // Implement login logic here
   };
 
-  const handleSignupClick = () => {
-    console.log('Navigate to signup');
-    // Implement navigation to Signup View
-  };
-
-  const handlePasswordRetrievalClick = () => {
-    console.log('Password retrieval clicked');
-    // Implement password retrieval logic
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Login</Text>
+      <Text style={styles.heading}>Welcome Back</Text>
+      <Text style={styles.subHeading}>Log in to continue</Text>
+
       <TextInput
         style={styles.input}
         placeholder="Username"
+        placeholderTextColor="#888"
         value={username}
         onChangeText={setUsername}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#888"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
+
       <TouchableOpacity style={styles.button} onPress={handleLoginClick}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handleSignupClick}>
-        <Text style={styles.link}>Don't have an account? Sign up</Text>
+
+      <TouchableOpacity>
+        <Text style={styles.forgotPassword}>Forgot your password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={handlePasswordRetrievalClick}>
-        <Text style={styles.link}>Forgot your password?</Text>
-      </TouchableOpacity>
+
+      <View style={styles.signupContainer}>
+        <Text style={styles.signupText}>Don't have an account?</Text>
+        <Link href="/SignupView" style={styles.signupLink}> Sign up</Link>
+      </View>
     </View>
   );
 };
@@ -54,33 +53,59 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
+    backgroundColor: '#f5f5f5',
   },
   heading: {
-    fontSize: 30,
-    marginBottom: 20,
+    fontSize: 28,
+    fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 5,
+  },
+  subHeading: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#666',
+    marginBottom: 20,
   },
   input: {
-    height: 40,
-    borderColor: '#ccc',
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginBottom: 12,
     borderWidth: 1,
-    marginBottom: 10,
-    paddingLeft: 10,
+    borderColor: '#ddd',
   },
   button: {
     backgroundColor: '#007BFF',
-    paddingVertical: 10,
+    paddingVertical: 14,
+    borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 10,
+    marginVertical: 10,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
+    fontWeight: 'bold',
   },
-  link: {
-    color: 'blue',
+  forgotPassword: {
     textAlign: 'center',
-    marginVertical: 5,
+    color: '#007BFF',
+    marginVertical: 8,
+  },
+  signupContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  signupText: {
+    fontSize: 14,
+    color: '#666',
+  },
+  signupLink: {
+    fontSize: 14,
+    color: '#007BFF',
+    fontWeight: 'bold',
   },
 });
 
