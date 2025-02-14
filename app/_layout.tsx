@@ -1,11 +1,10 @@
 import { Stack } from 'expo-router';
-import { View } from 'react-native';
 
-export default function RootLayout() {
+export default function Layout() {
   return (
-    <Stack>
-        <Stack.Screen name="login" />
-        <Stack.Screen name="signup" />
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="LoginView" />
+      <Stack.Screen name="SignupView" />
     </Stack>
   );
 }

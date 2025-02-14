@@ -22,6 +22,8 @@ export default function SignupView() {
         style={styles.input}
         placeholder="Email"
         value={email}
+        keyboardType="email-address"
+        autoCapitalize="none"
         onChangeText={setEmail}
       />
       <TextInput

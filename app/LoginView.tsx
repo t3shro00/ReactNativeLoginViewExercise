@@ -1,21 +1,24 @@
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
 
 export default function LoginView() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Login</Text>
-      
+
       <TextInput
         style={styles.input}
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
+        placeholder="Email"
+        value={email}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        onChangeText={setEmail}
       />
       <TextInput
         style={styles.input}
